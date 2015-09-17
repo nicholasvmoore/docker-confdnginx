@@ -17,3 +17,7 @@ mode = "0644"
 
 # These are the commands that will be used to check whether the rendered config is
 # valid and to reload the actual service once the new config is in place
+check_cmd = "/usr/sbin/nginx -t"
+
+# reload http://wiki.nginx.org/CommandLine#Stopping_or_Restarting_Nginx
+reload_cmd = "kill -HUP $( cat /var/run/nginx.pid )"
