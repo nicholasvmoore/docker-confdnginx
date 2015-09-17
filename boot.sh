@@ -10,6 +10,10 @@ export ETCD=$HOST_IP:4001
 echo "[nginx] booting container. ETCD: $ETCD"
 
 # Loop until confd has updated the nginx config
+# Start nginx
+echo "[nginx] starting nginx service..."
+nginx
+
 until confd -onetime -node $ETCD -config-file /etc/confd/conf.d/nginx.toml; do
   echo "[nginx] waiting for confd to refresh nginx.conf"
     sleep 5
@@ -18,10 +22,6 @@ until confd -onetime -node $ETCD -config-file /etc/confd/conf.d/nginx.toml; do
 # Run confd in the background to watch the upstream servers
 confd -interval 10 -node $ETCD -config-file /etc/confd/conf.d/nginx.toml &
 echo "[nginx] confd is listening for changes on etcd..."
-
-# Start nginx
-echo "[nginx] starting nginx service..."
-nginx &
 
 # Tail all nginx log files
 tail -f /var/log/nginx/*.log
