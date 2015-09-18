@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t confd .
+docker build -t nicholasvmoore/docker-confdnginx .

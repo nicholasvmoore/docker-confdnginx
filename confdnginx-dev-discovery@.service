@@ -1,0 +1,11 @@
+[Unit]
+Description=Announce npc-dev@%i
+BindsTo=npc-dev@%i.service
+After=npc-dev@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "while true; do etcdctl set /services/dev/npc/npc-dev@%i '%H,'$(echo $(docker port npc-dev-%i 80 | cut -d':' -f2))'' -ttl 60; /usr/bin/sleep 45;done"
+ExecStop=/usr/bin/etcdctl rm /services/dev/npc/npc-dev@%i
+
+[X-Fleet]
+MachineOf=npc-dev@%i.service

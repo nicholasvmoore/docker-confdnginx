@@ -1,0 +1,23 @@
+[Unit]
+Description=confd nginx %i docker container
+After=rpcbind.service
+After=docker.service
+Before=npc-discovery-dev@%i.service
+Requires=docker.service
+Requires=rpcbind.service
+Requires=npc-discovery-dev@%i.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+KillMode=none
+ExecStartPre=-/usr/bin/docker stop npc-dev-%i
+ExecStartPre=-/usr/bin/docker rm npc-dev-%i
+ExecStart=/usr/bin/docker run --rm -v /mnt/lun00/coreos00/confd/dev:/etc/confd:rw -v /mnt/lun00/coreos00/wordpress/dev:/php:rw -P=true --name=npc-dev-%i nicholasvmoore/docker-confdnginx
+ExecStop=/usr/bin/docker stop npc-dev-%i
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+Conflicts=npc-dev@*.service
