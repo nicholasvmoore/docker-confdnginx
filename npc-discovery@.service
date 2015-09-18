@@ -1,11 +1,11 @@
 [Unit]
-Description=Announce confdnginx-dev@%i
-BindsTo=confdnginx-dev@%i.service
-After=confdnginx-dev@%i.service
+Description=Announce npc-dev@%i
+BindsTo=npc-dev@%i.service
+After=npc-dev@%i.service
 
 [Service]
-ExecStart=/bin/sh -c "while true; do etcdctl set /services/dev/confdnginx/confdnginx-dev@%i '%H,'$(echo $(docker port confdnginx-dev-%i 9000 | cut -d':' -f2))'' -ttl 60; /usr/bin/sleep 45;done"
-ExecStop=/usr/bin/etcdctl rm /services/dev/confdnginx/confdnginx-dev@%i
+ExecStart=/bin/sh -c "while true; do etcdctl set /services/dev/npc/npc-dev@%i '%H,'$(echo $(docker port npc-dev-%i 9000 | cut -d':' -f2))'' -ttl 60; /usr/bin/sleep 45;done"
+ExecStop=/usr/bin/etcdctl rm /services/dev/npc/npc-dev@%i
 
 [X-Fleet]
-MachineOf=confdnginx-dev@%i.service
+MachineOf=npc-dev@%i.service

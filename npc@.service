@@ -1,23 +1,23 @@
 [Unit]
-Description=confdnginx %i docker container
+Description=npc %i docker container
 After=rpcbind.service
 After=docker.service
-Before=confdnginx-discovery@%i.service
+Before=npc-discovery@%i.service
 Requires=docker.service
 Requires=rpcbind.service
-Requires=confdnginx-discovery@%i.service
+Requires=npc-discovery@%i.service
 
 [Service]
 TimeoutStartSec=0
 Restart=always
 KillMode=none
-ExecStartPre=-/usr/bin/docker stop confdnginx-%i
-ExecStartPre=-/usr/bin/docker rm confdnginx-%i
-ExecStart=/usr/bin/docker run --rm -v /mnt/lun00/coreos00/wordpress/dev:/php:rw -P=true --name=confdnginx-%i nicholasvmoore/docker-confdnginx
-ExecStop=/usr/bin/docker stop confdnginx-%i
+ExecStartPre=-/usr/bin/docker stop npc-%i
+ExecStartPre=-/usr/bin/docker rm npc-%i
+ExecStart=/usr/bin/docker run --rm -v /mnt/lun00/coreos00/wordpress/dev:/php:rw -P=true --name=npc-%i nicholasvmoore/docker-npc
+ExecStop=/usr/bin/docker stop npc-%i
 
 [Install]
 WantedBy=multi-user.target
 
 [X-Fleet]
-Conflicts=confdnginx@*.service
+Conflicts=npc@*.service
