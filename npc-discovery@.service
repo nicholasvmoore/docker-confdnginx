@@ -4,7 +4,7 @@ BindsTo=npc@%i.service
 After=npc@%i.service
 
 [Service]
-ExecStart=/bin/sh -c "while true; do etcdctl set /services/prod/npc/npc@%i '%H,'$(echo $(docker port npc-%i 80 | cut -d':' -f2))'' -ttl 60; /usr/bin/sleep 45;done"
+ExecStart=/bin/sh -c "while true; do /usr/bin/sleep 5; etcdctl set /services/prod/npc/npc@%i '%H,'$(echo $(docker port npc-%i 80 | cut -d':' -f2))'' -ttl 60; /usr/bin/sleep 40;done"
 ExecStop=/usr/bin/etcdctl rm /services/prod/npc/npc@%i
 
 [X-Fleet]

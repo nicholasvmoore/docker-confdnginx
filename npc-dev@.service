@@ -13,6 +13,7 @@ Restart=always
 KillMode=none
 ExecStartPre=-/usr/bin/docker stop npc-dev-%i
 ExecStartPre=-/usr/bin/docker rm npc-dev-%i
+ExecStartPre=/usr/bin/docker pull nicholasvmoore/docker-npc
 ExecStart=/usr/bin/docker run --rm -v /mnt/lun00/coreos00/confd/dev/npc:/etc/confd:rw -v /mnt/lun00/coreos00/wordpress/dev:/php:rw -P=true --name=npc-dev-%i nicholasvmoore/docker-npc
 ExecStop=/usr/bin/docker stop npc-dev-%i
 
