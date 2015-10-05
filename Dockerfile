@@ -2,7 +2,7 @@
 #
 # Version 0.0.1
 
-FROM centos:7
+FROM centos:7.1.1503
 
 ENTRYPOINT "/boot.sh"
 
