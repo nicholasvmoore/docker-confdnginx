@@ -14,7 +14,7 @@ KillMode=none
 ExecStartPre=-/usr/bin/docker stop npc-dev-%i
 ExecStartPre=-/usr/bin/docker rm -f npc-dev-%i
 ExecStartPre=/usr/bin/docker pull nicholasvmoore/docker-npc
-ExecStart=/usr/bin/docker run --rm -v /mnt/mpzfs01/coreos00/confd/dev/npc:/etc/confd:rw -v /mnt/mpzfs01/coreos00/wwww/dev:/php:rw -P=true --name=npc-dev-%i nicholasvmoore/docker-npc
+ExecStart=/usr/bin/docker run --rm -v /mnt/mpzfs01/coreos00/confd/dev/npc:/etc/confd:rw -v /mnt/mpzfs01/coreos00/www/dev:/php:rw -P=true --name=npc-dev-%i nicholasvmoore/docker-npc
 ExecStop=/usr/bin/docker stop npc-dev-%i
 
 [Install]
