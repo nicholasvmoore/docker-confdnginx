@@ -5,7 +5,7 @@ set -eo pipefail
 
 export ETCD_PORT=${ETCD_PORT:-4001}
 export HOST_IP=${HOST_IP:-172.17.42.1}
-export ETCD=$COREOS_PRIVATE_IPV4:4001
+export ETCD=$HOST_IP:4001
 
 echo "[nginx] booting container. ETCD: $ETCD"
 
